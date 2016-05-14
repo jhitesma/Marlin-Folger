@@ -504,6 +504,7 @@ static void lcd_main_menu() {
       MENU_ITEM(submenu, MSG_DELTA_CALIBRATE, lcd_delta_calibrate_menu);
     #endif
   }
+  MENU_ITEM(gcode, MSG_SETHOME, PSTR("G92 X0 Y0 Z0"));
   MENU_ITEM(submenu, MSG_CONTROL, lcd_control_menu);
 
   #if ENABLED(SDSUPPORT)

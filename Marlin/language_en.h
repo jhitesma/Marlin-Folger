@@ -509,4 +509,6 @@
   #define MSG_DELTA_CALIBRATE_CENTER          "Calibrate Center"
 #endif
 
+#define MSG_SETHOME "Set XYZ to 000"
+ 
 #endif // LANGUAGE_EN_H
