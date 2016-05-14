@@ -509,6 +509,11 @@
   #define MSG_DELTA_CALIBRATE_CENTER          "Calibrate Center"
 #endif
 
-#define MSG_SETHOME "Set XYZ to 000"
+// MPCNC menu labels
+#define MSG_MPCNC_SETHOME "Set XYZ to 000"
+#define MSG_MPCNC_NEEDLE_OFF "Needle Off"
+#define MSG_MPCNC_NEEDLE_LOW "Needle LOW"
+#define MSG_MPCNC_NEEDLE_MED "Needle MED"
+#define MSG_MPCNC_NEEDLE_FULL "Needle FULL" 
  
 #endif // LANGUAGE_EN_H
