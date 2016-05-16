@@ -510,6 +510,7 @@
 #endif
 
 // MPCNC menu labels
+#define MSG_MPCNC_MPCNC "MPCNC Shortcuts"
 #define MSG_MPCNC_SETHOME "Set XYZ to 000"
 #define MSG_MPCNC_NEEDLE_OFF "Needle Off"
 #define MSG_MPCNC_NEEDLE_LOW "Needle LOW"

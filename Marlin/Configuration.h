@@ -1038,6 +1038,14 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = true; // set to true to invert the lo
 //
 //#define SAV_3DLCD
 
+
+//
+// MPCNC Shortcuts menu
+//
+// Enable a menu in the LCD with shortcuts for MPCNC machines
+//
+#define MPCNCMENU 
+
 //=============================================================================
 //=============================== Extra Features ==============================
 //=============================================================================

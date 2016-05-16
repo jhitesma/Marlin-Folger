@@ -96,6 +96,9 @@ static void lcd_status_screen();
   static void lcd_control_temperature_preheat_abs_settings_menu();
   static void lcd_control_motion_menu();
   static void lcd_control_volumetric_menu();
+	#ifdef MPCNCMENU
+	static void lcd_mpcnc_menu();
+	#endif
 
   #if ENABLED(HAS_LCD_CONTRAST)
     static void lcd_set_contrast();
@@ -495,6 +498,9 @@ inline void line_to_current(AxisEnum axis) {
 static void lcd_main_menu() {
   START_MENU();
   MENU_ITEM(back, MSG_WATCH);
+  #ifdef MPCNCMENU
+    MENU_ITEM(submenu, MSG_MPCNC_MPCNC, lcd_mpcnc_menu);
+  #endif
   if (movesplanned() || IS_SD_PRINTING) {
     MENU_ITEM(submenu, MSG_TUNE, lcd_tune_menu);
   }
@@ -504,11 +510,6 @@ static void lcd_main_menu() {
       MENU_ITEM(submenu, MSG_DELTA_CALIBRATE, lcd_delta_calibrate_menu);
     #endif
   }
-  MENU_ITEM(gcode, MSG_MPCNC_SETHOME, PSTR("G92 X0 Y0 Z0"));
-  MENU_ITEM(gcode, MSG_MPCNC_NEEDLE_OFF, PSTR("M280 P0 S0"));
-  MENU_ITEM(gcode, MSG_MPCNC_NEEDLE_LOW, PSTR("M280 P0 S90"));
-  MENU_ITEM(gcode, MSG_MPCNC_NEEDLE_MED, PSTR("M280 P0 S135"));
-  MENU_ITEM(gcode, MSG_MPCNC_NEEDLE_FULL, PSTR("M280 P0 S180"));
 
   MENU_ITEM(submenu, MSG_CONTROL, lcd_control_menu);
 
@@ -538,6 +539,32 @@ static void lcd_main_menu() {
 
   END_MENU();
 }
+
+/**
+ *
+ * "MPCNC Shortucuts" submenu items
+ *
+ *
+ */
+ 
+static void lcd_mpcnc_menu() {
+  START_MENU();
+
+  //
+  // ^ Main
+  //
+  MENU_ITEM(back, MSG_MAIN);
+
+  // Reset Home
+  MENU_ITEM(gcode, MSG_MPCNC_SETHOME, PSTR("G92 X0 Y0 Z0"));
+
+	// Needle Speed Control
+  MENU_ITEM(gcode, MSG_MPCNC_NEEDLE_OFF, PSTR("M280 P0 S0"));
+  MENU_ITEM(gcode, MSG_MPCNC_NEEDLE_LOW, PSTR("M280 P0 S90"));
+  MENU_ITEM(gcode, MSG_MPCNC_NEEDLE_MED, PSTR("M280 P0 S135"));
+  MENU_ITEM(gcode, MSG_MPCNC_NEEDLE_FULL, PSTR("M280 P0 S180"));
+  END_MENU();
+} 
 
 /**
  *
