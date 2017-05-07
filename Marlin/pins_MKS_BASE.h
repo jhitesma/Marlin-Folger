@@ -24,7 +24,16 @@
  * MKS BASE 1.0 – Arduino Mega2560 with RAMPS v1.4 pin assignments
  */
 
-#include "pins_RAMPS_14_EFB.h"
+#if HOTENDS > 2 || E_STEPPERS > 2
+  #error "MKS BASE 1.0 supports up to 2 hotends / E-steppers. Comment out this line to continue."
+#endif
 
-#undef HEATER_1_PIN
-#define HEATER_1_PIN        7
+#define BOARD_NAME "MKS BASE 1.0"
+
+//
+// Heaters / Fans
+//
+// Power outputs EFBF or EFBE
+#define MOSFET_D_PIN 7
+
+#include "pins_RAMPS.h"

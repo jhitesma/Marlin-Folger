@@ -28,15 +28,26 @@
  */
 
 #ifndef __AVR_AT90USB1286__
-  #error Oops!  Make sure you have 'Teensy++ 2.0' selected from the 'Tools -> Boards' menu.
+  #error "Oops!  Make sure you have 'Teensy++ 2.0' selected from the 'Tools -> Boards' menu."
 #endif
 
 #if ENABLED(AT90USBxx_TEENSYPP_ASSIGNMENTS)  // use Teensyduino Teensy++2.0 pin assignments instead of Marlin traditional.
-  #error These Printrboard assignments depend on traditional Marlin assignments, not AT90USBxx_TEENSYPP_ASSIGNMENTS in fastio.h
+  #error "These Printrboard assignments depend on traditional Marlin assignments, not AT90USBxx_TEENSYPP_ASSIGNMENTS in fastio.h"
 #endif
 
+#define BOARD_NAME         "Printrboard Rev F"
 #define LARGE_FLASH        true
 
+//
+// Limit Switches
+//
+#define X_STOP_PIN         35
+#define Y_STOP_PIN         12
+#define Z_STOP_PIN         36
+
+//
+// Steppers
+//
 #define X_STEP_PIN          0
 #define X_DIR_PIN           1
 #define X_ENABLE_PIN       39
@@ -53,7 +64,28 @@
 #define E0_DIR_PIN          7
 #define E0_ENABLE_PIN      19
 
-#define HEATER_0_PIN       21  // Extruder
+// uncomment to enable an I2C based DAC like on the Printrboard REVF
+#define DAC_STEPPER_CURRENT
+// Number of channels available for DAC, For Printrboar REVF there are 4
+#define DAC_STEPPER_ORDER { 3, 2, 1, 0 }
+
+#define DAC_STEPPER_SENSE    0.11
+#define DAC_STEPPER_ADDRESS  0
+#define DAC_STEPPER_MAX   3520
+#define DAC_STEPPER_VREF     1 // internal Vref, gain 1x = 2.048V
+#define DAC_STEPPER_GAIN     0
+#define DAC_OR_ADDRESS    0x00
+
+//
+// Temperature Sensors
+//
+#define TEMP_0_PIN          1   // Analog Input (Extruder)
+#define TEMP_BED_PIN        0   // Analog Input (Bed)
+
+//
+// Heaters / Fans
+//
+#define HEATER_0_PIN       21 // Extruder
 #define HEATER_1_PIN       46
 #define HEATER_2_PIN       47
 #define HEATER_BED_PIN     20
@@ -66,45 +98,15 @@
   #define FAN_PIN          16
 #endif
 
-#define X_STOP_PIN         35
-#define Y_STOP_PIN         12
-#define Z_STOP_PIN         36
-
-#define TEMP_0_PIN          1  // Extruder / Analog pin numbering
-#define TEMP_BED_PIN        0  // Bed / Analog pin numbering
-
-#define FILWIDTH_PIN        2  // ANALOG NUMBERING
-
-#define TEMP_1_PIN         -1
-#define TEMP_2_PIN         -1
-
-////LCD Pin Setup////
-
-#define SDPOWER            -1
+//
+// Misc. Functions
+//
 #define SDSS               20 // Teensylu pin mapping
-#define LED_PIN            -1
-#define PS_ON_PIN          -1
-#define KILL_PIN           -1
-#define ALARM_PIN          -1
+#define FILWIDTH_PIN        2 // Analog Input
 
-// uncomment to enable an I2C based DAC like on the Printrboard REVF
-#define DAC_STEPPER_CURRENT
-// Number of channels available for DAC, For Printrboar REVF there are 4
-#define DAC_STEPPER_ORDER {3,2,1,0}
-
-#define DAC_STEPPER_SENSE    0.11
-#define DAC_STEPPER_ADDRESS  0
-#define DAC_STEPPER_MAX   3520
-#define DAC_STEPPER_VREF     1 //internal Vref, gain 1x = 2.048V
-#define DAC_STEPPER_GAIN     0
-
-#if DISABLED(SDSUPPORT)
-  // these pins are defined in the SD library if building with SD support
-  #define SCK_PIN           9
-  #define MISO_PIN         11
-  #define MOSI_PIN         10
-#endif
-
+//
+// LCD / Controller
+//
 #if ENABLED(ULTRA_LCD)
   #define BEEPER_PIN -1
 
@@ -117,15 +119,11 @@
 
   #define BTN_EN1   16
   #define BTN_EN2   17
-  #define BTN_ENC   18//the click
-
-  #define BLEN_C 2
-  #define BLEN_B 1
-  #define BLEN_A 0
+  #define BTN_ENC   18 // the click
 
   #define SD_DETECT_PIN -1
 
-  //encoder rotation values
+  // encoder rotation values
   #define encrot0 0
   #define encrot1 2
   #define encrot2 3
@@ -133,22 +131,19 @@
 #endif
 
 #if ENABLED(VIKI2) || ENABLED(miniVIKI)
-  #define BEEPER_PIN 32 //FastIO
-  // Pins for DOGM SPI LCD Support
-  #define DOGLCD_A0  42 //Non-FastIO
-  #define DOGLCD_CS  43 //Non-FastIO
+  #define BEEPER_PIN 32 // FastIO
+  #define DOGLCD_A0  42 // Non-FastIO
+  #define DOGLCD_CS  43 // Non-FastIO
   #define LCD_SCREEN_ROT_180
 
-  //The encoder and click button (FastIO Pins)
+  // (FastIO Pins)
   #define BTN_EN1 26
   #define BTN_EN2 27
-  #define BTN_ENC 47  //the click switch
+  #define BTN_ENC 47
 
   #define SDSS 45
-  #define SD_DETECT_PIN -1 // FastIO (Manual says 72 I'm not certain cause I can't test)
+  #define SD_DETECT_PIN -1 // FastIO (Manual says 72)
 
-  #if ENABLED(TEMP_STAT_LEDS)
-    #define STAT_LED_RED      12 //Non-FastIO
-    #define STAT_LED_BLUE     10 //Non-FastIO
-  #endif
+  #define STAT_LED_RED_PIN  12 // Non-FastIO
+  #define STAT_LED_BLUE_PIN 10 // Non-FastIO
 #endif

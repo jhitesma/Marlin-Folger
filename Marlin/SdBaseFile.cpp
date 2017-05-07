@@ -405,7 +405,7 @@ bool SdBaseFile::make83Name(const char* str, uint8_t* name, const char** ptr) {
       uint8_t b;
       while ((b = pgm_read_byte(p++))) if (b == c) goto fail;
       // check size and only allow ASCII printable characters
-      if (i > n || c < 0X21 || c > 0X7E)goto fail;
+      if (i > n || c < 0x21 || c == 0x7F) goto fail;
       // only upper case allowed in 8.3 names - convert lower to upper
       name[i++] = (c < 'a' || c > 'z') ? (c) : (c + ('A' - 'a'));
     }
@@ -674,7 +674,7 @@ bool SdBaseFile::open(SdBaseFile* dirFile,
       index = 0;
     }
     // initialize as empty file
-    memset(p, 0, sizeof(dir_t));
+    memset(p, 0, sizeof(*p));
     memcpy(p->name, dname, 11);
 
     // set timestamps
