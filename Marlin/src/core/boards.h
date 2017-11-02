@@ -173,6 +173,7 @@
 #define BOARD_RAMPS4DUE_EFF    1545   // RAMPS4DUE (Power outputs: Hotend, Fan0, Fan1)
 #define BOARD_RAMPS4DUE_EEF    1546   // RAMPS4DUE (Power outputs: Hotend0, Hotend1, Fan)
 #define BOARD_RAMPS4DUE_SF     1548   // RAMPS4DUE (Power outputs: Spindle, Controller Fan)
+#define BOARD_ARCHIM           1589   // UltiMachine Archim (v1.0a With DRV8825)
 #define BOARD_ALLIGATOR        1602   // Alligator Board R2
 
 //

@@ -300,6 +300,8 @@
   #include "pins_RAMPS4DUE.h"
 #elif MB(RAMPS4DUE_SF)
   #include "pins_RAMPS4DUE.h"
+#elif MB(ARCHIM)
+  #include "pins_ARCHIM.h"
 #elif MB(ALLIGATOR)
   #include "pins_ALLIGATOR_R2.h"
 #elif MB(STM32F1R)
